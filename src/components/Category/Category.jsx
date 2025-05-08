@@ -85,77 +85,95 @@ const Category = () => {
     setFormData({ ...formData, image: e.target.files[0] });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setSubmitLoading(true);
+  // In the handleSubmit function, update the fetch and error handling:
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setSubmitLoading(true);
+  
+  try {
+    const formDataToSend = new FormData();
+    formDataToSend.append('title', formData.title);
+    formDataToSend.append('description', formData.description);
+    formDataToSend.append('tags', formData.tags);
+    formDataToSend.append('price', formData.price);
+    formDataToSend.append('priceDescription', formData.priceDescription);
+    formDataToSend.append('include', formData.include);
     
-    try {
-      const formDataToSend = new FormData();
-      formDataToSend.append('title', formData.title);
-      formDataToSend.append('description', formData.description);
-      formDataToSend.append('tags', formData.tags);
-      formDataToSend.append('price', formData.price);
-      formDataToSend.append('priceDescription', formData.priceDescription);
-      formDataToSend.append('include', formData.include);
-      
-      if (formData.image) {
-        formDataToSend.append('catImage', formData.image);
-      }
+    if (formData.image) {
+      formDataToSend.append('catImage', formData.image);
+    }
 
-      let url = `${process.env.REACT_APP_BASE_URL}/api/admin/auth/category/create`;
-      let method = 'POST';
-      
-      if (isEditMode && editId) {
-        url = `${process.env.REACT_APP_BASE_URL}/api/admin/auth/category/update/${editId}`;
-        method = 'PUT';
-      }
+    let url = `${process.env.REACT_APP_BASE_URL}/api/admin/auth/category/create`;
+    let method = 'POST';
+    
+    if (isEditMode && editId) {
+      url = `${process.env.REACT_APP_BASE_URL}/api/admin/auth/category/update/${editId}`;
+      method = 'PUT';
+    }
 
-      const response = await fetch(url, {
-        method: method,
+    console.log('Submitting to URL:', url);
+
+    const response = await fetch(url, {
+      method: method,
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+      body: formDataToSend
+    });
+
+    // Check if response is JSON
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      // Not JSON, get the text instead
+      const text = await response.text();
+      console.error('Received non-JSON response:', text);
+      throw new Error('Server returned non-JSON response. Check the API endpoint and server logs.');
+    }
+
+    const data = await response.json();
+
+    if (response.ok) {
+      // Refresh the categories list
+      const refreshResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/admin/auth/category/get`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: formDataToSend
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        // Refresh the categories list
-        const refreshResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/admin/auth/category/get`, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
-        });
-        const refreshData = await refreshResponse.json();
-        
-        if (refreshResponse.ok) {
-          setCategories(refreshData.data.allcategory);
         }
-        
-        // Close modal and reset form
-        setIsModalOpen(false);
-        setFormData({
-          title: '',
-          description: '',
-          tags: '',
-          price: '',
-          priceDescription: '',
-          include: '',
-          image: null
-        });
-        setIsEditMode(false);
-        setEditId(null);
+      });
+      
+      if (!refreshResponse.ok) {
+        console.warn('Failed to refresh categories after save');
       } else {
-        throw new Error(data.message || 'Failed to save category');
+        const refreshData = await refreshResponse.json();
+        setCategories(refreshData.data.allcategory);
       }
-    } catch (err) {
-      console.error('Error saving category:', err);
-      alert(`Error: ${err.message}`);
-    } finally {
-      setSubmitLoading(false);
+      
+      // Close modal and reset form
+      setIsModalOpen(false);
+      setFormData({
+        title: '',
+        description: '',
+        tags: '',
+        price: '',
+        priceDescription: '',
+        include: '',
+        image: null
+      });
+      setIsEditMode(false);
+      setEditId(null);
+      
+      // Show success message
+      alert('Category saved successfully!');
+    } else {
+      throw new Error(data.message || 'Failed to save category');
     }
-  };
+  } catch (err) {
+    console.error('Error saving category:', err);
+    alert(`Error: ${err.message}`);
+  } finally {
+    setSubmitLoading(false);
+  }
+};
 
   return (
     <div className={styles.container}>
