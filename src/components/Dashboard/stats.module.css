@@ -1,0 +1,91 @@
+.statsContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .statCard {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eaeaea;
+  }
+  
+  .statInfo h3 {
+    font-size: 16px;
+    color: #666;
+    margin: 0 0 8px 0;
+    font-weight: 500;
+  }
+  
+  .statInfo h2 {
+    font-size: 28px;
+    color: #333;
+    margin: 0;
+    font-weight: 600;
+  }
+  
+  .iconContainer {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f7ff;
+  }
+  
+  .iconUsers {
+    color: #3b82f6;
+    width: 24px;
+    height: 24px;
+  }
+  
+  .iconProducts {
+    color: #3b82f6;
+    width: 24px;
+    height: 24px;
+  }
+  
+  .iconCoupons {
+    color: #3b82f6;
+    width: 24px;
+    height: 24px;
+  }
+  
+  .iconOrders {
+    color: #3b82f6;
+    width: 24px;
+    height: 24px;
+  }
+  
+  .iconUsers {
+    color: #4caf50; /* Green */
+  }
+  .iconProducts {
+    color: #2196f3; /* Blue */
+  }
+  .iconCoupons {
+    color: #ff9800; /* Orange */
+  }
+  .iconOrders {
+    color: #9c27b0; /* Purple */
+  }
+  .iconCategory {
+    color: #3f51b5; /* Indigo */
+  }
+  .iconSubCategory {
+    color: #00bcd4; /* Cyan */
+  }
+  .iconQueries {
+    color: #f44336; /* Red */
+  }
+  .iconSubscribers {
+    color: #795548; /* Brown */
+  }
+  

@@ -1,0 +1,89 @@
+.overviewContainer {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eaeaea;
+  margin-bottom: 20px;
+}
+
+.overviewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.overviewHeader h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.viewAllBtn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  color: #3b82f6;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.statusList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.statusItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.statusInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.statusInfo span {
+  font-size: 15px;
+  color: #555;
+}
+
+.statusCount {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.iconPending,
+.iconPaused {
+  color: #f59e0b;
+  width: 20px;
+  height: 20px;
+}
+
+.iconProcessing {
+  color: #3b82f6;
+  width: 20px;
+  height: 20px;
+}
+
+.iconCompleted,
+.iconActive {
+  color: #10b981;
+  width: 20px;
+  height: 20px;
+}
+
+.iconCancelled {
+  color: #ef4444;
+  width: 20px;
+  height: 20px;
+}

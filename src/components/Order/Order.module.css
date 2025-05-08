@@ -1,0 +1,190 @@
+
+
+
+
+.container {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0 auto;
+    padding: 20px;
+    color: #333;
+    width: 100%;
+
+  }
+
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .title {
+    font-size: 32px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+  }
+  
+  .addButton {
+    background-color: #1a56db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .plusIcon {
+    font-size: 20px;
+    font-weight: 300;
+  }
+  
+  .filterSection {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    align-items: center;
+  }
+  
+  .searchContainer {
+    position: relative;
+    flex: 1;
+  }
+  
+  .searchIcon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6b7280;
+    font-size: 18px;
+  }
+  
+  .searchInput {
+    width: 100%;
+    padding: 12px 12px 12px 40px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+  }
+  
+  .filterContainer {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .filterLabel {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #6b7280;
+    font-weight: 500;
+  }
+  
+  .filterIcon {
+    font-size: 18px;
+  }
+  
+  .dateFilter, .statusFilter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 15px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+  }
+  
+  .calendarIcon {
+    color: #6b7280;
+  }
+  
+  .dropdownIcon {
+    font-size: 12px;
+    color: #6b7280;
+  }
+  
+  .resetButton {
+    background: none;
+    border: none;
+    color: #6b7280;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 12px 15px;
+  }
+  
+  .tableContainer {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+  
+  .table th {
+    background-color: #f9fafb;
+    padding: 16px;
+    font-weight: 500;
+    color: #6b7280;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .table td {
+    padding: 16px;
+    border-bottom: 1px solid #e5e7eb;
+    color: #111827;
+  }
+  
+  .table tr:last-child td {
+    border-bottom: none;
+  }
+  
+  .statusPill {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .statusCompleted {
+    background-color: #ecfdf5;
+    color: #065f46;
+  }
+  
+  .statusPending {
+    background-color: #fffbeb;
+    color: #92400e;
+  }
+  
+  .statusProcessing {
+    background-color: #eff6ff;
+    color: #1e40af;
+  }
+  
+  .statusCancelled {
+    background-color: #fef2f2;
+    color: #b91c1c;
+  }
+  
+  .viewButton {
+    background: none;
+    border: none;
+    color: #1a56db;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0;
+  }

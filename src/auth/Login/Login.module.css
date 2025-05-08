@@ -1,0 +1,224 @@
+/* Main container */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f0ff;
+    padding: 20px;
+  }
+  
+  /* Login card */
+  .loginCard {
+    display: flex;
+    width: 900px;
+    height: 550px;
+    background-color: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Left side with form */
+  .leftSide {
+    flex: 1;
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Header with logo and navigation */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #3a0ca3;
+  }
+  
+  .navigation {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .navLink {
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .active {
+    text-decoration: underline;
+    font-weight: bold;
+  }
+  
+  /* Login form */
+  .loginForm {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .title {
+    font-size: 32px;
+    margin-bottom: 30px;
+    color: #333;
+  }
+  
+  .inputGroup {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 25px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  
+  .input:focus {
+    border-color: #3a0ca3;
+  }
+  
+  .inputIcon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+  }
+  
+  /* Options row */
+  .options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+  }
+  
+  .rememberMe {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .forgotPassword {
+    font-size: 14px;
+    color: #666;
+    text-decoration: none;
+  }
+  
+  .forgotPassword:hover {
+    text-decoration: underline;
+  }
+  
+  /* Login button */
+  .loginButton {
+    width: 100%;
+    padding: 12px;
+    background-color: #3a0ca3;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .loginButton:hover {
+    background-color: #2d0a7a;
+  }
+  
+  /* Sign up option */
+  .signupOption {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .signupLink {
+    color: #3a0ca3;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .signupLink:hover {
+    text-decoration: underline;
+  }
+  
+  /* Right side with purple background */
+  .rightSide {
+    flex: 1;
+    background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Diagonal patterns on the right side */
+  .rightSide::before {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.1) 10px,
+      transparent 10px,
+      transparent 20px
+    );
+    transform: rotate(45deg);
+  }
+  
+  .rightSide::after {
+    content: "";
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    bottom: -25%;
+    right: -25%;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.8) 0%, rgba(76, 29, 149, 0.6) 70%);
+    border-radius: 50%;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .loginCard {
+      flex-direction: column;
+      height: auto;
+      width: 100%;
+    }
+  
+    .rightSide {
+      display: none;
+    }
+  
+    .header {
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+  
+    .navigation {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+  
