@@ -10,6 +10,7 @@ import ProductPage from './pages/Product Management';
 import SubscriptionPage from './pages/Subscription';
 import ProfilePage from './pages/Profile';
 import QueryPage from './pages/Query';
+import CouponPage from './pages/Coupons Management'
 
 
 function App() {
@@ -27,6 +28,8 @@ function App() {
           <Route path="/subscriptions" element={<SubscriptionPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/query" element={<QueryPage />} />
+          <Route path="/coupons" element={<CouponPage />} />
+
 
 
 

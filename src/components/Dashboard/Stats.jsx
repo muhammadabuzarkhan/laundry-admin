@@ -58,7 +58,7 @@ const Stats = () => {
   const fetchStats = async () => {
     try {
       const token = localStorage.getItem("token"); // Get token from local storage
-      const apiUrl = `http://localhost:3021/api/admin/counts`; // Get base URL from .env
+      const apiUrl = `${process.env.REACT_APP_BASE_URL}/api/admin/counts`; // Get base URL from .env
 
       const response = await fetch(apiUrl, {
         method: "GET",
