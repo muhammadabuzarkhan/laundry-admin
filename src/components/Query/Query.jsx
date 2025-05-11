@@ -1,72 +1,71 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Query.module.css';
 
 const Query = () => {
-  const [queries, setQueries] = useState([
-    { 
-      id: '01', 
-      name: 'John Smith', 
-      email: 'john.smith@example.com',
-      subject: 'Order Delivery Issue',
-      message: 'I placed an order three days ago but haven\'t received any shipping confirmation yet.',
-      date: '05/25/2024',
-      status: 'Waiting'
-    },
-    { 
-      id: '02', 
-      name: 'Sarah Johnson', 
-      email: 'sarah.j@example.com',
-      subject: 'Refund Request',
-      message: 'I would like to request a refund for my recent purchase as the item was damaged.',
-      date: '05/24/2024',
-      status: 'Responded'
-    },
-    { 
-      id: '03', 
-      name: 'Michael Brown', 
-      email: 'michael.brown@example.com',
-      subject: 'Product Availability',
-      message: 'When will the out-of-stock item be available again? I\'ve been waiting for weeks.',
-      date: '05/23/2024',
-      status: 'Waiting'
-    },
-    { 
-      id: '04', 
-      name: 'Emma Wilson', 
-      email: 'emma.w@example.com',
-      subject: 'Account Login Issue',
-      message: 'I\'m unable to log into my account. I\'ve tried resetting my password but still having issues.',
-      date: '05/22/2024',
-      status: 'Responded'
-    }
-  ]);
-
-  const [showConfirmation, setShowConfirmation] = useState(false);
-  const [selectedQueryId, setSelectedQueryId] = useState(null);
+  const [queries, setQueries] = useState([]);
   const [showMessageModal, setShowMessageModal] = useState(false);
   const [selectedMessage, setSelectedMessage] = useState('');
 
-  const handleStatusChange = (id) => {
-    const query = queries.find(q => q.id === id);
-    if (query && query.status === 'Waiting') {
-      setSelectedQueryId(id);
-      setShowConfirmation(true);
+  // Fetch all queries on mount
+  useEffect(() => {
+    const fetchQueries = async () => {
+      const token = localStorage.getItem('token');
+      const baseUrl = process.env.REACT_APP_BASE_URL;
+      try {
+        const response = await fetch(`${baseUrl}/api/admin/auth/query/get`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const result = await response.json();
+        if (result.status && result.data?.allqueries) {
+          const formattedQueries = result.data.allqueries.map((q, index) => ({
+            id: (index + 1).toString().padStart(2, '0'),
+            name: q.name,
+            email: q.email,
+            subject: q.subject,
+            message: q.message,
+            date: q.recievedOn,
+            status: q.status,
+            _id: q._id,
+          }));
+          setQueries(formattedQueries);
+        }
+      } catch (error) {
+        console.error('Failed to fetch queries:', error);
+      }
+    };
+
+    fetchQueries();
+  }, []);
+
+  const handleStatusChange = async (id) => {
+    const token = localStorage.getItem('token');
+    const baseUrl = process.env.REACT_APP_BASE_URL;
+
+    try {
+      const response = await fetch(`${baseUrl}/api/admin/auth/query/status/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const result = await response.json();
+
+      if (result.status) {
+        setQueries(prev =>
+          prev.map(q =>
+            q._id === id ? { ...q, status: 'Responded' } : q
+          )
+        );
+      } else {
+        console.error('Failed to update status:', result.message);
+      }
+    } catch (error) {
+      console.error('API error:', error);
     }
-  };
-
-  const confirmStatusChange = () => {
-    setQueries(queries.map(query => 
-      query.id === selectedQueryId 
-        ? { ...query, status: 'Responded' } 
-        : query
-    ));
-    setShowConfirmation(false);
-    setSelectedQueryId(null);
-  };
-
-  const cancelStatusChange = () => {
-    setShowConfirmation(false);
-    setSelectedQueryId(null);
   };
 
   const viewMessage = (message) => {
@@ -80,7 +79,9 @@ const Query = () => {
   };
 
   const getStatusClass = (status) => {
-    return status === 'Waiting' ? styles.statusWaiting : styles.statusResponded;
+    return status === 'Waiting' || status === 'Pending'
+      ? styles.statusWaiting
+      : styles.statusResponded;
   };
 
   return (
@@ -130,7 +131,7 @@ const Query = () => {
           </thead>
           <tbody>
             {queries.map((query) => (
-              <tr key={query.id}>
+              <tr key={query._id}>
                 <td>{query.id}</td>
                 <td>{query.name}</td>
                 <td>{query.email}</td>
@@ -150,10 +151,10 @@ const Query = () => {
                   </span>
                 </td>
                 <td className={styles.actionButtons}>
-                  {query.status === 'Waiting' && (
+                  {(query.status === 'Waiting' || query.status === 'Pending') && (
                     <button 
                       className={styles.respondButton}
-                      onClick={() => handleStatusChange(query.id)}
+                      onClick={() => handleStatusChange(query._id)}
                     >
                       Mark as Responded
                     </button>
@@ -164,28 +165,6 @@ const Query = () => {
           </tbody>
         </table>
       </div>
-
-      {showConfirmation && (
-        <div className={styles.modalOverlay}>
-          <div className={styles.confirmationModal}>
-            <div className={styles.modalHeader}>
-              <h2>Confirm Status Change</h2>
-              <button className={styles.closeButton} onClick={cancelStatusChange}>×</button>
-            </div>
-            <div className={styles.modalContent}>
-              <p>Are you sure? This will never reverse.</p>
-            </div>
-            <div className={styles.modalActions}>
-              <button className={styles.cancelButton} onClick={cancelStatusChange}>
-                Cancel
-              </button>
-              <button className={styles.confirmButton} onClick={confirmStatusChange}>
-                Confirm
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {showMessageModal && (
         <div className={styles.modalOverlay}>

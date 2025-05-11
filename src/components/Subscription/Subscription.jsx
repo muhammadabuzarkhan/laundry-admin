@@ -1,52 +1,83 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Subscription.module.css';
 
 const Subscription = () => {
-  const subscriptions = [
-    { 
-      id: '01', 
-      email: 'john.doe@example.com', 
-      date: '05/15/2024',
-      status: 'Active'
-    },
-    { 
-      id: '02', 
-      email: 'sarah.smith@example.com', 
-      date: '05/18/2024',
-      status: 'Active'
-    },
-    { 
-      id: '03', 
-      email: 'michael.brown@example.com', 
-      date: '05/20/2024',
-      status: 'Inactive'
-    },
-    { 
-      id: '04', 
-      email: 'emma.wilson@example.com', 
-      date: '05/22/2024',
-      status: 'Active'
-    }
-  ];
-
+  const [subscriptions, setSubscriptions] = useState([]);
   const [showConfirmation, setShowConfirmation] = useState(false);
-  const [deleteId, setDeleteId] = useState(null);
+  const [deleteEmail, setDeleteEmail] = useState(null);
 
-  const handleDeleteClick = (id) => {
-    setDeleteId(id);
+  const baseUrl = process.env.REACT_APP_BASE_URL;
+  const token = localStorage.getItem('token'); // Optional: remove if your API doesn't need auth
+
+  // Format date to 'YYYY-MM-DD'
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toISOString().split('T')[0]; // This will return 'YYYY-MM-DD'
+  };
+
+  // Fetch subscribers on mount
+  useEffect(() => {
+    const fetchSubscribers = async () => {
+      try {
+        const res = await fetch(`${baseUrl}/api/subscribers`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Optional
+          },
+        });
+
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          const formatted = data.map((sub, index) => ({
+            id: (index + 1).toString().padStart(2, '0'),
+            email: sub.email,
+            date: formatDate(sub.subscribedAt), // Use formatDate to format the 'subscribedAt' field
+            status: 'Active', // You can adjust this based on your schema
+          }));
+          setSubscriptions(formatted);
+        } else {
+          console.error('Unexpected response:', data);
+        }
+      } catch (error) {
+        console.error('Error fetching subscribers:', error);
+      }
+    };
+
+    fetchSubscribers();
+  }, [baseUrl, token]);
+
+  const handleDeleteClick = (email) => {
+    setDeleteEmail(email);
     setShowConfirmation(true);
   };
 
-  const handleConfirmDelete = () => {
-    console.log(`Deleting subscription with ID: ${deleteId}`);
-    // Here you would typically send a delete request to your backend
-    setShowConfirmation(false);
-    setDeleteId(null);
+  const handleConfirmDelete = async () => {
+    try {
+      const res = await fetch(`http://localhost:3021/api/admin/auth/subscribers/delete`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`, // Optional
+        },
+        body: JSON.stringify({ email: deleteEmail }),
+      });
+
+      const result = await res.json();
+      if (res.ok) {
+        setSubscriptions((prev) => prev.filter((sub) => sub.email !== deleteEmail));
+      } else {
+        console.error(result.error || 'Delete failed');
+      }
+    } catch (error) {
+      console.error('Error deleting subscriber:', error);
+    } finally {
+      setShowConfirmation(false);
+      setDeleteEmail(null);
+    }
   };
 
   const handleCancelDelete = () => {
     setShowConfirmation(false);
-    setDeleteId(null);
+    setDeleteEmail(null);
   };
 
   const getStatusClass = (status) => {
@@ -104,10 +135,10 @@ const Subscription = () => {
           </thead>
           <tbody>
             {subscriptions.map((subscription) => (
-              <tr key={subscription.id}>
+              <tr key={subscription.email}>
                 <td>{subscription.id}</td>
                 <td>{subscription.email}</td>
-                <td>{subscription.date}</td>
+                <td>{subscription.date}</td> {/* Display formatted date */}
                 <td>
                   <span className={`${styles.statusPill} ${getStatusClass(subscription.status)}`}>
                     {subscription.status}
@@ -116,7 +147,7 @@ const Subscription = () => {
                 <td className={styles.actionButtons}>
                   <button 
                     className={styles.deleteButton}
-                    onClick={() => handleDeleteClick(subscription.id)}
+                    onClick={() => handleDeleteClick(subscription.email)}
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="3 6 5 6 21 6"></polyline>
