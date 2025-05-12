@@ -1,5 +1,6 @@
 import styles from "./Overview.module.css"
 import { Clock, RefreshCw, CheckCircle, XCircle, ArrowRight } from "lucide-react"
+import { Link } from "react-router-dom"
 
 const OrdersOverview = () => {
   const orderStatuses = [
@@ -13,9 +14,10 @@ const OrdersOverview = () => {
     <div className={styles.overviewContainer}>
       <div className={styles.overviewHeader}>
         <h2>Orders Overview</h2>
-        <button className={styles.viewAllBtn}>
-          View all <ArrowRight size={16} />
-        </button>
+    
+        <Link to="/order" className={styles.viewAllBtn}>
+                  View all <ArrowRight size={16} />
+                </Link>
       </div>
 
       <div className={styles.statusList}>

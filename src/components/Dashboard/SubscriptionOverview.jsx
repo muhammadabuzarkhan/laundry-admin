@@ -1,4 +1,7 @@
+// components/SubscriptionsOverview.tsx
+
 import styles from "./Overview.module.css"
+import { Link } from "react-router-dom"
 import { CheckCircle, Clock, XCircle, ArrowRight } from "lucide-react"
 
 const SubscriptionsOverview = () => {
@@ -12,9 +15,9 @@ const SubscriptionsOverview = () => {
     <div className={styles.overviewContainer}>
       <div className={styles.overviewHeader}>
         <h2>Subscriptions Overview</h2>
-        <button className={styles.viewAllBtn}>
+        <Link to="/subscriptions" className={styles.viewAllBtn}>
           View all <ArrowRight size={16} />
-        </button>
+        </Link>
       </div>
 
       <div className={styles.statusList}>
