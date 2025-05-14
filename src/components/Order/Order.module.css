@@ -188,3 +188,287 @@
     cursor: pointer;
     padding: 0;
   }
+
+  /* Modal Container */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it's on top */
+}
+
+/* Modal Content */
+.modalContent {
+  background-color: white;
+  border-radius: 8px;
+  width: 70%;
+  max-width: 800px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  text-align: left;
+}
+
+
+/* Close Button */
+.closeButton {
+  position: relative;
+  top: 0px;
+  right: 0;
+  left: 95%;
+  align-items: right;
+  font-size: 30px;
+  color: #ff0000;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.2s ease;
+}
+
+.closeButton:hover {
+  color: #000;
+}
+
+/* Modal Header */
+.modalContent h2 {
+  margin: 0;
+  padding-bottom: 10px;
+  font-size: 24px;
+  font-weight: 600;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 15px;
+}
+
+/* Modal Body */
+.modalContent p {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+/* Key information bold */
+.modalContent p strong {
+  font-weight: 600;
+}
+
+/* Styling for the Order Status Pill */
+.statusCompleted {
+  color: white;
+  background-color: #4CAF50; /* Green */
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.statusPending {
+  color: white;
+  background-color: #ff9800; /* Orange */
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.statusProcessing {
+  color: white;
+  background-color: #2196F3; /* Blue */
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.statusCancelled {
+  color: white;
+  background-color: #f44336; /* Red */
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+/* Button Styles */
+.viewButton {
+  background-color: #2196F3;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.viewButton:hover {
+  background-color: #1976D2;
+}
+
+/* Modal Scrollable Area */
+.modalContent {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* If the modal is very tall, scroll should be applied */
+.modalContent::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modalContent::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+.modalContent::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+
+.statusPending {
+  background-color: #ffcc00; /* Yellow */
+}
+
+.statusCompleted {
+  background-color: #28a745; /* Green */
+}
+
+.statusButton {
+  background-color: #ffcc00;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.statusButton:hover {
+  background-color: #e6b800;
+}
+
+.statusButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.statusButton {
+  pointer-events: auto;/* Ensure the button is clickable */
+  background-color: #ffcc00;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.statusButton { /* Ensure the button is clickable */
+  background-color: #ffcc00;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+
+/* Button Styles */
+.statusButton {
+  background-color: #ffcc00;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.statusButton:hover {
+  background-color: #e6b800;
+}
+
+.statusButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Status Pill Styles */
+.statusCompleted {
+  color: white;
+  background-color: #4CAF50; /* Green */
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.statusPending {
+  color: white;
+  background-color: #ff9800; /* Orange */
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it's on top */
+}
+
+.modalContent {
+  background-color: white;
+  border-radius: 8px;
+  width: 70%;
+  max-width: 800px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  text-align: left;
+}
+
+.statusPill{
+  background-color: #dfdddd;
+  cursor: pointer;
+
+}
+
+.statusButton {
+  background-color: #28a745;
+}
+
+.statusPill {
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+/* Status colors */
+.statusPending {
+  background-color: #ffcc00;
+  color: #fff;
+}
+
+.statusCompleted {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.statusProcessing {
+  background-color: #17a2b8;
+  color: #fff;
+}
+
+.statusCancelled {
+  background-color: #dc3545;
+  color: #fff;
+}

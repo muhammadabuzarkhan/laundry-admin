@@ -338,11 +338,11 @@ const Category = () => {
                       onClick={() => handleOpenEditModal(category)}
                       title="Edit"
                     >✎</button>
-                    <button
+                    {/* <button
                       className={styles.deleteButton}
                       onClick={() => handleDeleteCategory(category._id)}
                       title="Delete"
-                    >🗑</button>
+                    >🗑</button> */}
                   </td>
                 </tr>
               ))

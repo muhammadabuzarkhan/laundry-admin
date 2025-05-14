@@ -1,78 +1,144 @@
-import React, { useState } from 'react';
+
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import styles from './Profile.module.css';
+
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState('personal');
   const [formData, setFormData] = useState({
-    firstName: 'Hussain',
-    lastName: 'Hussaini',
-    email: 'hussaini.7@icloud.com',
-    phone: '07476684500',
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
     currentPassword: '',
     newPassword: '',
     confirmPassword: ''
   });
+  const [userId, setUserId] = useState(null);
 
-  const handleTabChange = (tab) => {
-    setActiveTab(tab);
-  };
+  const token = localStorage.getItem('token');
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const res = await axios.get(`${BASE_URL}/api/admin/auth/profile`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        const { _id, firstName, lastName, email } = res.data.data.user;
+
+        setUserId(_id);
+        setFormData(prev => ({
+          ...prev,
+          firstName,
+          lastName,
+          email,
+          phone: '' // optional
+        }));
+      } catch (err) {
+        console.error('Failed to load profile:', err.response?.data || err.message);
+      }
+    };
+
+    fetchProfile();
+  }, [token]);
+
+  const handleTabChange = (tab) => setActiveTab(tab);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handlePersonalSubmit = (e) => {
+  const handlePersonalSubmit = async (e) => {
     e.preventDefault();
-    console.log('Personal information updated:', {
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      email: formData.email,
-      phone: formData.phone
-    });
-    // Here you would typically send the data to your backend
+    if (!userId) return alert("User ID not available");
+
+    try {
+      const res = await axios.put(
+        `${BASE_URL}/api/admin/auth/updateAdmin/${userId}`,
+        {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      );
+
+      const { user } = res.data.data;
+
+      setFormData(prev => ({
+        ...prev,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email
+      }));
+
+      alert(res.data.message);
+    } catch (err) {
+      console.error('Edit profile failed:', err.response?.data || err.message);
+      alert(err.response?.data?.message || "Failed to update profile");
+    }
   };
 
-  const handlePasswordSubmit = (e) => {
+  const handlePasswordSubmit = async (e) => {
     e.preventDefault();
-    console.log('Password updated');
-    // Here you would typically send the password update to your backend
-    // Reset password fields
-    setFormData({
-      ...formData,
-      currentPassword: '',
-      newPassword: '',
-      confirmPassword: ''
-    });
+
+    if (formData.newPassword !== formData.confirmPassword) {
+      return alert("New passwords do not match");
+    }
+
+    try {
+      const res = await axios.put(`${BASE_URL}/api/admin/auth/change-password`, {
+        oldPassword: formData.currentPassword,
+        newPassword: formData.newPassword
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      alert(res.data.message);
+
+      setFormData(prev => ({
+        ...prev,
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: ''
+      }));
+    } catch (err) {
+      console.error('Change password error:', err.response?.data || err.message);
+      alert(err.response?.data?.message || "Failed to change password");
+    }
   };
 
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>My Profile</h1>
-      
+
       <div className={styles.tabs}>
-        <button 
+        <button
           className={`${styles.tabButton} ${activeTab === 'personal' ? styles.activeTab : ''}`}
           onClick={() => handleTabChange('personal')}
         >
           Personal Information
         </button>
-        <button 
+        <button
           className={`${styles.tabButton} ${activeTab === 'security' ? styles.activeTab : ''}`}
           onClick={() => handleTabChange('security')}
         >
           Security
         </button>
       </div>
-      
+
       {activeTab === 'personal' && (
         <div className={styles.formContainer}>
           <h2 className={styles.sectionTitle}>Personal Information</h2>
           <p className={styles.sectionDescription}>Update your personal details here.</p>
-          
+
           <form onSubmit={handlePersonalSubmit}>
             <div className={styles.formRow}>
               <div className={styles.formGroup}>
@@ -85,7 +151,7 @@ const Profile = () => {
                   onChange={handleInputChange}
                 />
               </div>
-              
+
               <div className={styles.formGroup}>
                 <label htmlFor="lastName">Last Name</label>
                 <input
@@ -97,7 +163,7 @@ const Profile = () => {
                 />
               </div>
             </div>
-            
+
             <div className={styles.formGroup}>
               <label htmlFor="email">Email</label>
               <input
@@ -108,7 +174,7 @@ const Profile = () => {
                 onChange={handleInputChange}
               />
             </div>
-            
+
             <div className={styles.formGroup}>
               <label htmlFor="phone">Phone</label>
               <input
@@ -119,19 +185,19 @@ const Profile = () => {
                 onChange={handleInputChange}
               />
             </div>
-            
+
             <button type="submit" className={styles.submitButton}>
               Save Changes
             </button>
           </form>
         </div>
       )}
-      
+
       {activeTab === 'security' && (
         <div className={styles.formContainer}>
           <h2 className={styles.sectionTitle}>Change Password</h2>
           <p className={styles.sectionDescription}>Update your password here.</p>
-          
+
           <form onSubmit={handlePasswordSubmit}>
             <div className={styles.formGroup}>
               <label htmlFor="currentPassword">Current Password</label>
@@ -143,7 +209,7 @@ const Profile = () => {
                 onChange={handleInputChange}
               />
             </div>
-            
+
             <div className={styles.formGroup}>
               <label htmlFor="newPassword">New Password</label>
               <input
@@ -154,7 +220,7 @@ const Profile = () => {
                 onChange={handleInputChange}
               />
             </div>
-            
+
             <div className={styles.formGroup}>
               <label htmlFor="confirmPassword">Confirm New Password</label>
               <input
@@ -165,7 +231,7 @@ const Profile = () => {
                 onChange={handleInputChange}
               />
             </div>
-            
+
             <button type="submit" className={styles.submitButton}>
               Update Password
             </button>
