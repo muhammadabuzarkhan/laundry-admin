@@ -152,6 +152,11 @@
     align-items: center;
     justify-content: center;
   }
+  .thumbnail{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
   
   .actionButtons {
     display: flex;
@@ -174,6 +179,7 @@
     padding: 0;
   }
   
+
   /* Modal Styles */
   .modalOverlay {
     position: fixed;

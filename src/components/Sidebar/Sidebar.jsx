@@ -91,58 +91,58 @@ const Sidebar = () => {
       <nav className={styles.navigation}>
         <ul>
           <li className={styles.active}>
-            <Link to="/dashboard">
+            <Link to="/admin/dashboard">
               <Home className={styles.icon} />
               <span>Dashboard</span>
             </Link>
           </li>
          
           <li>
-            <Link to="/user">
+            <Link to="/admin/user">
               <Users className={styles.icon} />
               <span>Customers</span>
             </Link>
           </li>
          
           <li>
-            <Link to="/category">
+            <Link to="/admin/category">
               <BarChart2 className={styles.icon} />
               <span>Category</span>
             </Link>
           </li>
           <li>
-            <Link to="/subcategory">
+            <Link to="/admin/subcategory">
               <User className={styles.icon} />
               <span>Sub Category</span>
             </Link>
           </li>
           <li>
-            <Link to="/order">
+            <Link to="/admin/order">
               <ClipboardList className={styles.icon} />
               <span>Orders</span>
             </Link>
           </li>
          
           <li>
-            <Link to="/products">
+            <Link to="/admin/products">
               <ShoppingBag className={styles.icon} />
-              <span>Product Management</span>
+              <span>Products </span>
             </Link>
           </li>
           <li>
-            <Link to="/coupons">
+            <Link to="/admin/coupons">
               <Gift className={styles.icon} />
               <span>Coupons</span>
             </Link>
           </li>
           <li>
-            <Link to="/subscriptions">
+            <Link to="/admin/subscriptions">
               <Repeat className={styles.icon} />
               <span>Subscriptions</span>
             </Link>
           </li>
           <li>
-            <Link to="/query">
+            <Link to="/admin/query">
               <Repeat className={styles.icon} />
               <span>Query Management</span>
             </Link>
@@ -157,7 +157,7 @@ const Sidebar = () => {
       </nav>
 
     <li>
-      <Link to="/profile">
+      <Link to="/admin/profile">
       <div className={styles.adminUser}>
         <div className={styles.adminAvatar}>
           <Users className={styles.avatarIcon} />

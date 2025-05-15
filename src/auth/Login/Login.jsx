@@ -29,7 +29,7 @@ const Login = () => {
 
       if (response.ok && data.status) {
         localStorage.setItem('token', data.data.token);
-        navigate('/dashboard'); // redirect after login
+        navigate('/admin/dashboard'); // redirect after login
       } else {
         console.error('Login failed:', data.message || 'Unknown error');
       }

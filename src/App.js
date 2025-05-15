@@ -18,17 +18,17 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/laundry/admin" element={<Login />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/order" element={<OrderPage />} />
-          <Route path="/user" element={<UserPage />} />
-          <Route path="/category" element={<CategoryPage />} />
-          <Route path="/subcategory" element={<SubCategoryPage />} />
-          <Route path="/products" element={<ProductPage />} />
-          <Route path="/subscriptions" element={<SubscriptionPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/query" element={<QueryPage />} />
-          <Route path="/coupons" element={<CouponPage />} />
+          <Route path="/admin" element={<Login />} />
+          <Route path="/admin/dashboard" element={<DashboardPage />} />
+          <Route path="/admin/order" element={<OrderPage />} />
+          <Route path="/admin/user" element={<UserPage />} />
+          <Route path="/admin/category" element={<CategoryPage />} />
+          <Route path="/admin/subcategory" element={<SubCategoryPage />} />
+          <Route path="/admin/products" element={<ProductPage />} />
+          <Route path="/admin/subscriptions" element={<SubscriptionPage />} />
+          <Route path="/admin/profile" element={<ProfilePage />} />
+          <Route path="/admin/query" element={<QueryPage />} />
+          <Route path="/admin/coupons" element={<CouponPage />} />
 
 
 

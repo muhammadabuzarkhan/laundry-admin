@@ -15,7 +15,7 @@ const SubscriptionsOverview = () => {
     <div className={styles.overviewContainer}>
       <div className={styles.overviewHeader}>
         <h2>Subscriptions Overview</h2>
-        <Link to="/subscriptions" className={styles.viewAllBtn}>
+        <Link to="/admin/subscriptions" className={styles.viewAllBtn}>
           View all <ArrowRight size={16} />
         </Link>
       </div>

@@ -23,15 +23,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className={styles.recentOrdersSection}>
-        <div className={styles.recentOrdersHeader}>
-          <h2>Recent Orders</h2>
-          <button className={styles.viewAllBtn}>
-            View all <ArrowRight size={16} />
-          </button>
-        </div>
-        {/* Recent orders table would go here */}
-      </div>
+      
     </div>
   )
 }

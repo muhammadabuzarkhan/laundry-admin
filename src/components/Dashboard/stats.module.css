@@ -88,4 +88,10 @@
   .iconSubscribers {
     color: #795548; /* Brown */
   }
-  
+  .statLink {
+  text-decoration: none;
+  color: inherit;
+}
+.statLink:hover{
+    box-shadow: 0 1px 3px rgb(79, 118, 208);  
+}

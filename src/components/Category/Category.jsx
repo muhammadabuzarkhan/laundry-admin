@@ -254,19 +254,9 @@ const Category = () => {
       </div>
 
       <div className={styles.filterSection}>
-        <div className={styles.entriesContainer}>
-          <span>Show : </span>
-          <div className={styles.dropdown}>
-            <span>10</span>
-            <span className={styles.dropdownIcon}>▼</span>
-          </div>
-          <span>Entries</span>
-        </div>
-
-        <div className={styles.searchContainer}>
+                <div className={styles.searchContainer}>
           <input type="text" className={styles.searchInput} placeholder="Search" />
           <button className={styles.searchButton}><span className={styles.searchIcon}>⌕</span></button>
-          <button className={styles.filterButton}><span className={styles.filterIcon}>⊻</span></button>
         </div>
       </div>
 
@@ -338,11 +328,7 @@ const Category = () => {
                       onClick={() => handleOpenEditModal(category)}
                       title="Edit"
                     >✎</button>
-                    {/* <button
-                      className={styles.deleteButton}
-                      onClick={() => handleDeleteCategory(category._id)}
-                      title="Delete"
-                    >🗑</button> */}
+                  
                   </td>
                 </tr>
               ))
