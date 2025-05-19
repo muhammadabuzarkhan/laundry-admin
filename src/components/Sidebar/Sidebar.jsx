@@ -122,6 +122,13 @@ const Sidebar = () => {
               <span>Orders</span>
             </Link>
           </li>
+
+           <li>
+            <Link to="/admin/call-order">
+              <Repeat className={styles.icon} />
+              <span>Call Order</span>
+            </Link>
+          </li>
          
           <li>
             <Link to="/admin/products">

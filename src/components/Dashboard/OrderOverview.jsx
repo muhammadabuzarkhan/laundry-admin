@@ -51,7 +51,7 @@ const OrdersOverview = () => {
     const fetchOrderStatus = async () => {
       try {
         const token = localStorage.getItem("token")
-        const response = await fetch(`${process.env.REACT_APP_BASE_URL_Local}/api/admin/auth/order/getstatus`, {
+        const response = await fetch(`${process.env.REACT_APP_BASE_URL}/api/admin/auth/order/getstatus`, {
           headers: {
             "Authorization": `Bearer ${token}`,
             "Content-Type": "application/json"

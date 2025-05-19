@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './Profile.module.css';
 
-const BASE_URL = process.env.REACT_APP_BASE_URL_Local;
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState('personal');
