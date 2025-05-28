@@ -103,6 +103,13 @@ const Sidebar = () => {
               <span>Customers</span>
             </Link>
           </li>
+
+            <li>
+            <Link to="/admin/custom-users">
+              <Repeat className={styles.icon} />
+              <span>Custom User</span>
+            </Link>
+          </li>
          
           <li>
             <Link to="/admin/category">

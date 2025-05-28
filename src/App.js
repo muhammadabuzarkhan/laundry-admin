@@ -12,6 +12,7 @@ import ProfilePage from './pages/Profile';
 import QueryPage from './pages/Query';
 import CouponPage from './pages/Coupons Management'
 import CallOrderPage from './pages/Call Order'
+import CustomUserPage from './pages/Custom Customers';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path="/admin/query" element={<QueryPage />} />
           <Route path="/admin/coupons" element={<CouponPage />} />
           <Route path="/admin/call-order" element={<CallOrderPage />} />
+          <Route path="/admin/custom-users" element={<CustomUserPage />} />
         </Routes>
       </Router>
     </div>

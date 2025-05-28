@@ -4,7 +4,9 @@
     padding: 20px;
     color: #333;
     width: 100%;
+
   }
+
   
   .header {
     display: flex;
@@ -12,6 +14,20 @@
     align-items: center;
     margin-bottom: 20px;
   }
+  .addButton {
+    background-color: #00843D;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
   
   .title {
     font-size: 32px;
@@ -129,150 +145,59 @@
     border-bottom: none;
   }
   
-  .statusPill {
-    display: inline-block;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 500;
-  }
-  
-  .statusActive {
-    background-color: #ecfdf5;
-    color: #065f46;
-  }
-  
-  .statusInactive {
-    background-color: #fef2f2;
-    color: #b91c1c;
-  }
-  
-  .actionButtons {
+  .userIcon {
+    width: 40px;
+    height: 40px;
+    background-color: #f3f4f6;
+    border-radius: 50%;
     display: flex;
-    gap: 10px;
-  }
-  
-  .deleteButton {
-    background: none;
-    border: none;
-    color: #ef4444;
-    cursor: pointer;
-    padding: 0;
-  }
-  
-  /* Modal Styles */
-  .modalOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .confirmationModal {
-    background-color: white;
-    border-radius: 8px;
-    width: 90%;
-    max-width: 400px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .modalHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 24px;
-    border-bottom: 1px solid #e5e7eb;
-  }
-  
-  .modalHeader h2 {
-    margin: 0;
-    font-size: 20px;
-    font-weight: 600;
-  }
-  
-  .closeButton {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
     color: #6b7280;
   }
   
-  .modalContent {
-    padding: 24px;
+  .userIcon svg {
+    width: 24px;
+    height: 24px;
   }
   
-  .modalContent p {
-    margin: 0 0 12px;
-    color: #4b5563;
-  }
-  
-  .modalContent p:last-child {
-    margin-bottom: 0;
-  }
-  
-  .modalActions {
+  .viewButton {
+    background: none;
+    border: none;
+    color: #1a56db;
+    cursor: pointer;
+    padding: 0;
     display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-    padding: 16px 24px;
-    border-top: 1px solid #e5e7eb;
+    align-items: center;
+    justify-content: center;
   }
   
-  .cancelButton {
-    background-color: #f3f4f6;
-    color: #374151;
-    border: none;
-    border-radius: 6px;
-    padding: 10px 16px;
-    font-size: 16px;
-    cursor: pointer;
+  .viewButton svg {
+    width: 20px;
+    height: 20px;
   }
-  
-  .deleteConfirmButton {
-    background-color: #ef4444;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    padding: 10px 16px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  .statusDropdown {
-  padding: 5px 10px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  font-size: 14px;
+  .searchIcon{
+  color: rgb(8, 179, 188);
+  font-size: 25px;
 }
 
-.statusDropdown {
-  padding: 5px 12px;
-  border-radius: 4px;
+.actionCell {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.viewButton,
+.allOrderButton {
+  background: none;
   border: none;
-  font-size: 14px;
-  font-weight: bold;
-  outline: none;
-  background-color: #f0f0f0;
+  cursor: pointer;
+  padding: 4px;
+  transition: transform 0.2s ease;
 }
 
-/* 🔴 Pending: Yellow */
-.pending {
- color: #ff0000; /* Tailwind's yellow-400 */
-}
-
-/* 🔵 Processing: Blue */
-.processing {
-color: #3b82f6; /* Tailwind's blue-500 */
-}
-
-/* 🟢 Responded: Green */
-.responded {
- color: #22c55e; /* Tailwind's green-500 */
+.viewButton:hover,
+.allOrderButton:hover {
+  transform: scale(1.1);
 }

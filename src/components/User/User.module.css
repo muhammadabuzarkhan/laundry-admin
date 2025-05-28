@@ -166,3 +166,24 @@
   color: rgb(8, 179, 188);
   font-size: 25px;
 }
+
+.actionCell {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.viewButton,
+.allOrderButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  transition: transform 0.2s ease;
+}
+
+.viewButton:hover,
+.allOrderButton:hover {
+  transform: scale(1.1);
+}
