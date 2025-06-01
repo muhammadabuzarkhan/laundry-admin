@@ -1,20 +1,12 @@
 
-
-// import React, { useState, useEffect } from 'react';
+// import React, { useState } from 'react';
 // import styles from './CallOrder.module.css';
-// import {
-//   fetchCategories,
-//   fetchSubCategories,
-//   fetchProducts,
-//   createCallOrder
-// } from './CallOrderSevice'; // Adjust path if needed
+// import { createCallOrder } from './CallOrderSevice'; // Adjust path if needed
 
 // const AddCallOrderModal = ({ onClose, onOrderAdded }) => {
 //   const [formData, setFormData] = useState({
 //     user_name: '',
 //     user_phone: '',
-//     category: '',
-//     sub_category: '',
 //     product: '',
 //     weight: '',
 //     price: '',
@@ -23,59 +15,8 @@
 //     title: ''
 //   });
 
-//   const [categories, setCategories] = useState([]);
-//   const [subCategories, setSubCategories] = useState([]);
-//   const [products, setProducts] = useState([]);
-
 //   const [message, setMessage] = useState('');
 //   const [isError, setIsError] = useState(false);
-
-//   useEffect(() => {
-//     fetchCategories()
-//       .then(data => {
-//         if (Array.isArray(data?.data?.allcategory)) {
-//           setCategories(data.data.allcategory);
-//         }
-//       })
-//       .catch(err => {
-//         console.error("Fetch categories error:", err);
-//         setCategories([]);
-//       });
-//   }, []);
-
-//   useEffect(() => {
-//     if (!formData.category) {
-//       setSubCategories([]);
-//       setFormData(prev => ({ ...prev, sub_category: '', product: '' }));
-//       return;
-//     }
-
-//     fetchSubCategories(formData.category)
-//       .then(data => {
-//         setSubCategories(data?.data?.selectedSubCategory || []);
-//       })
-//       .catch(err => {
-//         console.error('Subcategory fetch error:', err);
-//         setSubCategories([]);
-//       });
-//   }, [formData.category]);
-
-//   useEffect(() => {
-//     if (!formData.sub_category) {
-//       setProducts([]);
-//       setFormData(prev => ({ ...prev, product: '' }));
-//       return;
-//     }
-
-//     fetchProducts(formData.category)
-//       .then(data => {
-//         setProducts(data?.data?.selectedProducts || []);
-//       })
-//       .catch(err => {
-//         console.error('Fetch products error:', err);
-//         setProducts([]);
-//       });
-//   }, [formData.sub_category]);
 
 //   const handleChange = (e) => {
 //     const { name, value } = e.target;
@@ -83,38 +24,30 @@
 //   };
 
 //   const handleSubmit = async (e) => {
-//   e.preventDefault();
+//     e.preventDefault();
 
-//   // Get full objects from the selected IDs
-//   const selectedCategory = categories.find(c => c._id === formData.category);
-//   const selectedSubCategory = subCategories.find(sc => sc._id === formData.sub_category);
-//   const selectedProduct = products.find(p => p._id === formData.product);
+//     const payload = {
+//       ...formData,
+//       weight: parseFloat(formData.weight),
+//       price: parseFloat(formData.price)
+//     };
 
-//   const payload = {
-//     ...formData,
-//     weight: parseFloat(formData.weight),
-//     price: parseFloat(formData.price),
-//     category: selectedCategory?.title || '',
-//     sub_category: selectedSubCategory?.title || '',
-//     product: selectedProduct?.title || ''
-//   };
-
-//   try {
-//     const data = await createCallOrder(payload);
-//     if (data._id) {
-//       setIsError(false);
-//       setMessage('✅ Order created!');
-//       onOrderAdded(data);
-//       setTimeout(() => onClose(), 1500);
-//     } else {
+//     try {
+//       const data = await createCallOrder(payload);
+//       if (data._id) {
+//         setIsError(false);
+//         setMessage('✅ Order created!');
+//         onOrderAdded(data);
+//         setTimeout(() => onClose(), 1500);
+//       } else {
+//         setIsError(true);
+//         setMessage(data.message || '❌ Failed to create order');
+//       }
+//     } catch (err) {
 //       setIsError(true);
-//       setMessage(data.message || '❌ Failed to create order');
+//       setMessage('❌ Server error');
 //     }
-//   } catch (err) {
-//     setIsError(true);
-//     setMessage('❌ Server error');
-//   }
-// };
+//   };
 
 //   return (
 //     <div className={styles.modalOverlay}>
@@ -133,6 +66,7 @@
 //           {[
 //             ['user_name', 'User Name'],
 //             ['user_phone', 'Phone Number'],
+//             ['product', 'Product Name'],
 //             ['weight', 'Weight (kg)', 'number'],
 //             ['price', 'Price', 'number'],
 //             ['address', 'Address'],
@@ -152,36 +86,6 @@
 //           ))}
 
 //           <div className={styles.formGroup}>
-//             <label>Category</label>
-//             <select name="category" value={formData.category} onChange={handleChange} required>
-//               <option value="">-- Select Category --</option>
-//               {categories.map(c => (
-//                 <option key={c._id} value={c._id}>{c.title}</option>
-//               ))}
-//             </select>
-//           </div>
-
-//           <div className={styles.formGroup}>
-//             <label>Sub Category</label>
-//             <select name="sub_category" value={formData.sub_category} onChange={handleChange} required>
-//               <option value="">-- Select Sub Category --</option>
-//               {subCategories.map(sc => (
-//                 <option key={sc._id} value={sc._id}>{sc.title}</option>
-//               ))}
-//             </select>
-//           </div>
-
-//           <div className={styles.formGroup}>
-//             <label>Product</label>
-//             <select name="product" value={formData.product} onChange={handleChange} required>
-//               <option value="">-- Select Product --</option>
-//               {products.map(p => (
-//                 <option key={p._id} value={p._id}>{p.title}</option>
-//               ))}
-//             </select>
-//           </div>
-
-//           <div className={styles.formGroup}>
 //             <label>Description</label>
 //             <textarea name="description" value={formData.description} onChange={handleChange} />
 //           </div>
@@ -198,10 +102,9 @@
 
 // export default AddCallOrderModal;
 
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './CallOrder.module.css';
-import { createCallOrder } from './CallOrderSevice'; // Adjust path if needed
+import { createCallOrder, getAllCustomers } from './CallOrderSevice'; // Ensure correct path
 
 const AddCallOrderModal = ({ onClose, onOrderAdded }) => {
   const [formData, setFormData] = useState({
@@ -212,11 +115,43 @@ const AddCallOrderModal = ({ onClose, onOrderAdded }) => {
     price: '',
     description: '',
     address: '',
-    title: ''
+    title: '',
+    delivery_datetime: '' // New field
   });
 
+  const [customers, setCustomers] = useState([]);
+  const [selectedCustomerId, setSelectedCustomerId] = useState('');
   const [message, setMessage] = useState('');
   const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    const fetchCustomers = async () => {
+      try {
+        const res = await getAllCustomers();
+        if (res.status && res.data) {
+          setCustomers(res.data);
+        }
+      } catch (err) {
+        console.error('Failed to fetch customers:', err);
+      }
+    };
+    fetchCustomers();
+  }, []);
+
+  const handleCustomerChange = (e) => {
+    const customerId = e.target.value;
+    setSelectedCustomerId(customerId);
+
+    const customer = customers.find(c => c._id === customerId);
+    if (customer) {
+      setFormData(prev => ({
+        ...prev,
+        user_name: `${customer.firstName} ${customer.lastName}`,
+        user_phone: customer.phone,
+        address: customer.address
+      }));
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -229,7 +164,8 @@ const AddCallOrderModal = ({ onClose, onOrderAdded }) => {
     const payload = {
       ...formData,
       weight: parseFloat(formData.weight),
-      price: parseFloat(formData.price)
+      price: parseFloat(formData.price),
+      delivery_datetime: formData.delivery_datetime || undefined
     };
 
     try {
@@ -256,6 +192,7 @@ const AddCallOrderModal = ({ onClose, onOrderAdded }) => {
           <h2>Add Call Order</h2>
           <button className={styles.closeButton} onClick={onClose}>×</button>
         </div>
+
         <form onSubmit={handleSubmit} className={styles.modalForm}>
           {message && (
             <div className={isError ? styles.errorMessage : styles.successMessage}>
@@ -263,14 +200,27 @@ const AddCallOrderModal = ({ onClose, onOrderAdded }) => {
             </div>
           )}
 
+          <div className={styles.formGroup}>
+            <label>Select Customer (Email)</label>
+            <select value={selectedCustomerId} onChange={handleCustomerChange} required>
+              <option value="">-- Select Email --</option>
+              {customers.map(customer => (
+                <option key={customer._id} value={customer._id}>
+                  {customer.email}
+                </option>
+              ))}
+            </select>
+          </div>
+
           {[
-            ['user_name', 'User Name'],
+            ['user_name', 'Customer Name'],
             ['user_phone', 'Phone Number'],
             ['product', 'Product Name'],
             ['weight', 'Weight (kg)', 'number'],
             ['price', 'Price', 'number'],
             ['address', 'Address'],
-            ['title', 'Title']
+            ['title', 'Title'],
+            ['delivery_datetime', 'Delivery Date & Time', 'datetime-local']
           ].map(([key, label, type = 'text']) => (
             <div className={styles.formGroup} key={key}>
               <label>{label}</label>
@@ -280,7 +230,7 @@ const AddCallOrderModal = ({ onClose, onOrderAdded }) => {
                 name={key}
                 value={formData[key]}
                 onChange={handleChange}
-                required
+                required={key !== 'description'}
               />
             </div>
           ))}

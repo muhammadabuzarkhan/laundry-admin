@@ -365,6 +365,30 @@
   font-weight: bold;
 }
 
+/* CallOrder.module.css */
+
+.statusSelect {
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1.5px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  min-width: 110px;
+}
+
+/* On focus */
+.statusSelect:focus {
+  outline: none;
+  border-color: #007bff; /* Blue highlight */
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+}
+
+/* Optional: color-code options (only works if you style option tags inline or with JS) */
+/* Otherwise, this will only style the dropdown itself */
+
 .errorMessage {
   color: red;
   font-weight: bold;
@@ -388,4 +412,30 @@
   .formGroup textarea {
     font-size: 14px;
   }
+}
+
+.statusSelect {
+  padding: 5px;
+  border-radius: 5px;
+  font-weight: 500;
+  border: 1px solid #ccc;
+}
+
+/* Status colors */
+.pending {
+  background-color: #fff3cd;
+  color: #856404;
+  border-color: #ffeeba;
+}
+
+.processing {
+  background-color: #cce5ff;
+  color: #004085;
+  border-color: #b8daff;
+}
+
+.completed {
+  background-color: #d4edda;
+  color: #155724;
+  border-color: #c3e6cb;
 }
