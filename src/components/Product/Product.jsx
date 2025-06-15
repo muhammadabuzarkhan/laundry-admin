@@ -65,7 +65,7 @@ const Product = () => {
     try {
       let response;
       if (editProduct) {
-        response = await fetch(`${process.env.REACT_APP_BASE_URL}/api/admin/auth/product/update/${editProduct.id}`, {
+        response = await fetch(`${process.env.REACT_APP_BASE_URL}/api/admin/auth/product/edit/${editProduct.id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
