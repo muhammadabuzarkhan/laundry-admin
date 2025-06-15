@@ -295,7 +295,7 @@ const Category = () => {
                     {category.catImage ? (
                       <>
                         <img
-                          src={`${process.env.REACT_APP_API_BASE_URL}/${category.catImage}`}
+                          src={`${process.env.REACT_APP_BASE_URL}/${category.catImage}`}
                           alt={category.title}
                           className={styles.thumbnail}
                           onError={(e) => {
